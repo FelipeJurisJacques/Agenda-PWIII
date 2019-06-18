@@ -1,0 +1,119 @@
+button {
+    text-transform: uppercase;
+    outline: none;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+    transition: all 0.3s ease-in-out;
+    z-index: 1;
+}
+
+button:focus {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.ripple {
+    position: absolute;
+    background: rgba(0,0,0,.25);
+    border-radius: 100%;
+    pointer-events: none;
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);  
+}
+
+.ripple.show {
+    -webkit-animation: ripple .45s ease-out;
+    animation: ripple .45s ease-out;
+}
+
+@-webkit-keyframes ripple { 
+    to {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes ripple { 
+    to {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+
+/* BOTAO AZUL GRANDE */
+
+.buttonBlue {
+    color: #FFF;
+    border-radius: 2px;
+    min-width: 64px;
+    height: 36px;
+    padding: 0 16px;
+    border: none;
+    background-color: #3F51B5;
+}
+
+.buttonBlue:focus {    
+    background-color: #4e6cef; 
+    border-color: #285e8e;
+}
+
+
+/* BOTOES DE ACOENS */
+
+.buttonAdd {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    background-color: #3F51B5;
+    background-image: url('../icon/addition.svg');
+    background-position: center;
+}
+
+.buttonAddMin,
+.buttonDelMin {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 15px;
+}
+
+.buttonAddMin {
+    background-color: #3F51B5;
+    background-image: url('../icon/addition.svg');
+}
+
+.buttonAdd:focus,
+.buttonAddMin:focus {    
+    background-color: #4e6cef; 
+}
+
+.buttonDelMin {
+    background-color: #FF4081;
+    background-image: url('../icon/delete.svg');
+}
+
+.buttonDelMin:focus {    
+    background-color: #FF79A7; 
+}
+
+
+
+/* BOTOES DE NAVEGACAO */
+
+.buttonDonw {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    background-color: #3F51B5;
+    background-image: url('../icon/donw.svg');
+}
+
+.buttonDonw:focus {    
+    background-color: #4e6cef; 
+}

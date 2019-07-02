@@ -31,7 +31,7 @@ public class UsuarioEntity implements Serializable{
 	@JsonIgnore
 	private String senha;
 
-	@JsonIgnore
+	//@JsonIgnore
 	@ManyToMany(mappedBy = "usuarios")
 	private List<ProjetoEntity> projetos = new ArrayList<>();
 	

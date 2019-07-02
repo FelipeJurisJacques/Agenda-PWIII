@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,14 +18,14 @@ import com.pwiii.agenda.service.UsuarioService;
 
 @RestController
 @RequestMapping(value="/usuario")
-@CrossOrigin(origins = "http://localhost")
+@CrossOrigin(origins = "*")
 public class UsuarioResource {
 	
 	@Autowired
 	UsuarioService service;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<UsuarioEntity> listar(Authentication authentication){
+	public ResponseEntity<UsuarioEntity> buscar(Authentication authentication){
 		UsuarioEntity obj = service.getByEmail(authentication.getName());
 		return ResponseEntity.ok(obj);
 	}
@@ -44,10 +43,10 @@ public class UsuarioResource {
 		return ResponseEntity.created(uri).build();
 	}
 
-	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	//@RequestMapping(method=RequestMethod.PUT)
+	@RequestMapping(value="/PUT", method=RequestMethod.POST)
 	public ResponseEntity<Void> atualizar(
 			@Valid @RequestBody NovaSenhaDTO objDTO,
-			@PathVariable Integer id,
 			Authentication authentication
 	){
 		UsuarioEntity obj = service.getByEmail(authentication.getName());

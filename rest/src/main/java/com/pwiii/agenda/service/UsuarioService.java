@@ -41,7 +41,7 @@ public class UsuarioService {
 	
 	public UsuarioEntity atualizar (UsuarioEntity obj) {
 		UsuarioEntity banco = buscar(obj.getId());
-		banco.setSenha(obj.getSenha());
+		obj.setSenha(encoder.encode(obj.getSenha()));
 		return dao.save(banco);
 	}
 	

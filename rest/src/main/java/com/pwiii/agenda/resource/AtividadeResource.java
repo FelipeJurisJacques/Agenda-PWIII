@@ -68,7 +68,8 @@ public class AtividadeResource {
 		return ResponseEntity.created(uri).build();
 	}
 
-	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	//@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	@RequestMapping(value="/PUT/{id}", method=RequestMethod.POST)
 	public ResponseEntity<Void> atualizar(
 			@Valid @RequestBody AtividadeAtualizarDTO objDTO,
 			@PathVariable Integer id
@@ -91,7 +92,8 @@ public class AtividadeResource {
 		return ResponseEntity.created(uri).build();
 	}
 
-	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	//@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/DELETE/{id}", method=RequestMethod.POST)
 	public ResponseEntity<Void> deletar(
 			@PathVariable Integer id
 	){

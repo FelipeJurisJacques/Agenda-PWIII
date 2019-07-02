@@ -29,28 +29,40 @@ public class ProjetoService {
 		return dao.save(obj);
 	}
 	
+	public ProjetoEntity atualizar (ProjetoEntity obj, List<UsuarioEntity> novosUsuarios) {
+		List<UsuarioEntity> usuarios = obj.getUsuarios();
+		for (UsuarioEntity novo : novosUsuarios) {
+			if(!usuarios.contains(novo)) {
+				obj.addUsuario(novo);
+				System.out.println("Adicionando ao projeto: " + novo);
+			}
+		}
+		return dao.save(obj);
+	}
+	
 	public void apagar(Integer id, UsuarioEntity usuario) {
 		ProjetoEntity obj = buscar(id);
 		List<UsuarioEntity> list = obj.getUsuarios();
-		int size = list.size();
-		if(size == 1) {
+		System.out.println("Lista de usuarios atual: " + list);
+		if(list.size() == 1) {
 			for(UsuarioEntity item: list) {
 				if(item.getId() == usuario.getId()) {
 					dao.deleteById(id);
 					break;
 				}
 			}
-		}
+		}/*
 		else {
 			int i = 0;
 			for(UsuarioEntity item: list) {
 				i++;
 				if(item.getId() == usuario.getId()) {
 					list.remove(i);
-					obj.setUsuarios(list);
+					//obj.setUsuarios(list);
+					//dao.save(obj);
 					break;
 				}
 			}
-		}
+		}*/
 	}
 }

@@ -28,6 +28,7 @@ public class ProjetoEntity implements Serializable{
 	@OneToMany(mappedBy="projeto")
 	private List<AtividadeEntity> atividades = new ArrayList<>();
 
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "grupo", 
 		joinColumns = @JoinColumn(name = "projeto_id"),

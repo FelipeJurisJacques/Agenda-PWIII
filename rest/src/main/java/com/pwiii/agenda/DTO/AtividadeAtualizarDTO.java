@@ -1,13 +1,13 @@
 package com.pwiii.agenda.DTO;
 
 import java.io.Serializable;
-import javax.validation.constraints.NotEmpty;
+//import javax.validation.constraints.NotEmpty;
 import com.pwiii.agenda.entity.AtividadeEntity;
 
 public class AtividadeAtualizarDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
-	@NotEmpty
+	//@NotEmpty
 	private Integer estado;
 	
 	public AtividadeAtualizarDTO() {

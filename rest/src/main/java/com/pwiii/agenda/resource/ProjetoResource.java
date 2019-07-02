@@ -32,19 +32,14 @@ public class ProjetoResource {
 	@Autowired
 	UsuarioService usuarioService;
 
+	/*
 	@RequestMapping(method = RequestMethod.GET)
 	public List<ProjetoEntity> listar(Authentication authentication) {
-		UsuarioEntity usuario = usuarioService.getByEmail(authentication.getName());
-		List<ProjetoEntity> lista = service.buscar();
-		List<ProjetoEntity> list = new ArrayList<>();
-
-		for (ProjetoEntity item : lista) {
-			if (item.getId() == usuario.getId()) {
-				list.add(item);
-			}
-		}
+		//UsuarioEntity usuario = usuarioService.getByEmail(authentication.getName());
+		List<ProjetoEntity> list = service.buscar();
 		return list;
 	}
+	*/
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> salvar(@Valid @RequestBody ProjetoDTO objDTO, Authentication authentication) {
@@ -58,26 +53,26 @@ public class ProjetoResource {
 		return ResponseEntity.created(uri).build();
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	//@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/PUT/{id}", method = RequestMethod.POST)
 	public ResponseEntity<Void> atualizar(@Valid @RequestBody ProjetoAtualizarDTO objDTO, @PathVariable Integer id) {
 		ProjetoEntity obj = service.buscar(id);
-		List<UsuarioEntity> usuarios = obj.getUsuarios();
 		List<UsuarioEntity> novosUsuarios = new ArrayList<>();
 		for (String item : objDTO.getEmail()) {
 			UsuarioEntity usuario = usuarioService.getByEmail(item);
+			System.out.println("Email detectado: " + item);
 			if (usuario.getId() != null) {
 				novosUsuarios.add(usuario);
 			}
 		}
-		for (UsuarioEntity novo : novosUsuarios) {
-			if(!usuarios.contains(novo)) {
-				obj.addUsuario(novo);
-			}
-		}
-		return ResponseEntity.noContent().build();
+		//return ResponseEntity.noContent().build();
+		obj = service.atualizar(obj, novosUsuarios);	
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	//@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/DELETE/{id}", method = RequestMethod.POST)
 	public ResponseEntity<Void> deletar(@PathVariable Integer id, Authentication authentication) {
 		UsuarioEntity usuario = usuarioService.getByEmail(authentication.getName());
 		service.apagar(id, usuario);

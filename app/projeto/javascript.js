@@ -13,21 +13,28 @@ request.GET(config.getUrl() + 'usuario').then(e => {
         user.innerHTML = e.nome
         document.querySelector('#user').appendChild(user)
     }
-}).catch(e => {
-    console.log(e)
-})
-
-request.GET(config.getUrl() + 'projeto').then(e => {
-    console.log('resposta: ')
-    console.log(e)
-    if (Array.isArray(e)) {
-        e.forEach(element => {
-            showProjeto(element)
-        })
+    if (e.projetos) {
+        if (Array.isArray(e.projetos)) {
+            e.projetos.forEach(element => {
+                showProjeto(element)
+            })
+        }
     }
 }).catch(e => {
     console.log(e)
 })
+
+// request.GET(config.getUrl() + 'projeto').then(e => {
+//     console.log('resposta: ')
+//     console.log(e)
+//     if (Array.isArray(e)) {
+//         e.forEach(element => {
+//             showProjeto(element)
+//         })
+//     }
+// }).catch(e => {
+//     console.log(e)
+// })
 
 function showProjeto(obj) {
     const atividade = document.createElement('div')
@@ -88,9 +95,12 @@ function showProjeto(obj) {
 
 function DeletarProjeto(id) {
     if (confirm("Deseja remover essa projeto?")) {
-        request.DELETE(config.getUrl() + 'projeto/' + id).then(e => {
+        request.setOutput(false)
+        
+        //request.DELETE(config.getUrl() + 'projeto/' + id).then(e => {
+        request.POST(config.getUrl() + 'projeto/DELETE/' + id).then(e => {
             console.log(e)
-            window.location.reload()
+            // window.location.reload()
         }).catch(e => {
             console.log(e)
             alert(e)
@@ -108,9 +118,12 @@ function AtualizarProjeto(e, id) {
             }
             console.log(JSON.stringify(obj))
             if (confirm('Deseja compartilhar esse projeto com os usuários: ' + emails)) {
-                request.PUT(config.getUrl() + 'projeto/' + id, obj).then(e => {
+                request.setOutput(false)
+
+                // request.PUT(config.getUrl() + 'projeto/' + id, obj).then(e => {
+                request.POST(config.getUrl() + 'projeto/PUT/' + id, obj).then(e => {
                     console.log(e)
-                    window.location.reload()
+                    // window.location.reload()
                 }).catch(e => {
                     console.log(e)
                     alert(e)

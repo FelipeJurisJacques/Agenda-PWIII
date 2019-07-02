@@ -146,8 +146,10 @@ if (url.getItens().id) {
             const obj = {
                 estado: estado
             }
-            
-            request.PUT(config.getUrl() + 'atividade/' + id, obj).then(e => {
+            request.setOutput(false)
+
+            // request.PUT(config.getUrl() + 'atividade/' + id, obj).then(e => {
+            request.POST(config.getUrl() + 'atividade/PUT/' + id, obj).then(e => {
                 console.log(e)
                 window.location.reload()
             }).catch(e => {
@@ -159,7 +161,10 @@ if (url.getItens().id) {
 
     function DeletarAtividade(id) {
         if (confirm("Deseja remover essa atividade?")) {
-            request.DELETE(config.getUrl() + 'atividade/' + id).then(e => {
+            request.setOutput(false)
+
+            // request.DELETE(config.getUrl() + 'atividade/' + id).then(e => {
+            request.POST(config.getUrl() + 'atividade/DELETE/' + id).then(e => {
                 console.log(e)
                 window.location.reload()
             }).catch(e => {

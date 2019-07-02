@@ -22,7 +22,7 @@ document.querySelector('form').addEventListener('submit', function (e) {
         senha: senha
     }
 
-    let request = new FetchResource()
+    let request = new FetchResource('json', false)
     request.POST(config.getUrl() + 'usuario', obj).then(e => {
         console.log(e)
         window.location.href = '../index.html'

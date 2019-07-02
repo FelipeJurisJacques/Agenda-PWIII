@@ -1,5 +1,5 @@
 const config = new configClass()
-const request = new FetchResource('json', 'json', {
+const request = new FetchResource('json', false, {
     'Content-Type': 'application/json;charset=UTF-8',
     'Authorization': localStorage.getItem('token')
 })
@@ -33,7 +33,7 @@ document.querySelector('form').addEventListener('submit', function (e) {
         senha: document.getElementsByName('senha2')[0].value
     }
     
-    request.PUT(config.getUrl() + 'usuario', obj).then(e => {
+    request.POST(config.getUrl() + 'usuario/PUT/', obj).then(e => {
         console.log(e)
         window.location.href = '../projeto/index.html'
     }).catch(e => {
